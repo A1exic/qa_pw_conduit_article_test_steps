@@ -18,32 +18,32 @@ test.beforeEach(async ({ page }) => {
     password: faker.internet.password(),
   };
 
-  await test.step('Open sign up page', async () => {
+  await test.step('Open Sign Up page', async () => {
     await signUpPage.open();
   });
 
-  await test.step('Fill username', async () => {
+  await test.step('Fill username field', async () => {
     await signUpPage.fillUsernameField(user.username);
   });
 
-  await test.step('Fill email', async () => {
+  await test.step('Fill email field', async () => {
     await signUpPage.fillEmailField(user.email);
   });
 
-  await test.step('Fill password', async () => {
+  await test.step('Fill password field', async () => {
     await signUpPage.fillPasswordField(user.password);
   });
 
-  await test.step('Click Sign Up', async () => {
+  await test.step('Click Sign Up button', async () => {
     await signUpPage.clickSignUpButton();
   });
 
-  await test.step('Verify Your Feed tab visible', async () => {
+  await test.step('Verify Your Feed tab is visible', async () => {
     await homePage.assertYourFeedTabIsVisible();
   });
 });
 
-test('Create article with required and optional fields', async () => {
+test('Create article with required and optional fields', async ({ page }) => {
   const article = {
     title: faker.lorem.sentence(),
     description: faker.lorem.sentence(),
@@ -67,11 +67,12 @@ test('Create article with required and optional fields', async () => {
     await createArticlePage.fillArticleText(article.text);
   });
 
-  await test.step('Fill article tag', async () => {
+  await test.step('Fill tag and press Enter', async () => {
     await createArticlePage.fillArticleTag(article.tag);
+    await page.keyboard.press('Enter');
   });
 
-  await test.step('Publish article', async () => {
+  await test.step('Click Publish Article button', async () => {
     await createArticlePage.clickPublishArticleButton();
   });
 
@@ -80,7 +81,7 @@ test('Create article with required and optional fields', async () => {
   });
 });
 
-test('Create article without article description', async () => {
+test('Create article without description', async ({ page }) => {
   const article = {
     title: faker.lorem.sentence(),
     text: faker.lorem.paragraph(),
@@ -99,11 +100,12 @@ test('Create article without article description', async () => {
     await createArticlePage.fillArticleText(article.text);
   });
 
-  await test.step('Fill article tag', async () => {
+  await test.step('Fill tag and press Enter', async () => {
     await createArticlePage.fillArticleTag(article.tag);
+    await page.keyboard.press('Enter');
   });
 
-  await test.step('Publish article', async () => {
+  await test.step('Click Publish Article button', async () => {
     await createArticlePage.clickPublishArticleButton();
   });
 
@@ -112,7 +114,7 @@ test('Create article without article description', async () => {
   });
 });
 
-test('Create article without article text', async () => {
+test('Create article without text', async ({ page }) => {
   const article = {
     title: faker.lorem.sentence(),
     description: faker.lorem.sentence(),
@@ -131,11 +133,12 @@ test('Create article without article text', async () => {
     await createArticlePage.fillArticleDescription(article.description);
   });
 
-  await test.step('Fill article tag', async () => {
+  await test.step('Fill tag and press Enter', async () => {
     await createArticlePage.fillArticleTag(article.tag);
+    await page.keyboard.press('Enter');
   });
 
-  await test.step('Publish article', async () => {
+  await test.step('Click Publish Article button', async () => {
     await createArticlePage.clickPublishArticleButton();
   });
 
@@ -146,7 +149,7 @@ test('Create article without article text', async () => {
   });
 });
 
-test('Create article without article tag', async () => {
+test('Create article without tag', async () => {
   const article = {
     title: faker.lorem.sentence(),
     description: faker.lorem.sentence(),
@@ -169,7 +172,7 @@ test('Create article without article tag', async () => {
     await createArticlePage.fillArticleText(article.text);
   });
 
-  await test.step('Publish article', async () => {
+  await test.step('Click Publish Article button', async () => {
     await createArticlePage.clickPublishArticleButton();
   });
 
